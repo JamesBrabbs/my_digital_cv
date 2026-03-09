@@ -1,0 +1,493 @@
+import { useState, useEffect, useRef, useCallback } from "react";
+
+// ─── Scroll Reveal Hook ──────────────────────────────────────
+function useScrollReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  const style = {
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translateY(0)" : "translateY(24px)",
+    transition: "opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+  };
+
+  return { ref, style, visible };
+}
+
+const CV_DATA = {
+  name: "James Brabbs",
+  credentials: "LLB MSc Assoc. CIPD",
+  tagline: "Building the systems that make great workplaces work",
+  summary:
+    "A CIPD Level 7 qualified HR leader with a Master's in HRM and a background in Law. I specialise in HR Technology, digital transformation, and aligning people strategies with commercial objectives in high-growth, M&A environments. I turn manual, fragmented HR operations into automated, data-driven ecosystems — and I build the teams to sustain them.",
+  stats: [
+    { value: 10, suffix: "+", label: "Years in HR" },
+    { value: 5, suffix: "+", label: "HR System Implementations" },
+    { value: 100, suffix: "'s", label: "Of Hours Automated" },
+    { value: 2000, suffix: "+", label: "Hires via ATS Rollout" },
+  ],
+  roles: [
+    {
+      title: "Head of HR Technology & Reporting",
+      company: "Davies Group",
+      url: "www.davies-group.com",
+      period: "Jan 2025 – Present",
+      context: "Promoted into a newly created role leading all global HR systems and reporting. Managing a team of 4 systems and reporting analysts, working cross-functionally to enhance HR systems, processes and integrations. Focus on digitalising HR processes and driving automation and AI deployment.",
+      companyContext: "Global insurance services provider · 9,000+ employees · UK, USA, Canada & India · $1.1b+ turnover",
+      achievements: [
+        "Created Davies Group's first HR technology strategy with KPIs and SLAs",
+        "Built a new HR Technology team from scratch in India, freeing UK team for 40% more project focus",
+        "Led global ATS rollout to US and APAC — 2,000+ successful hires since launch in October 2024",
+        "Supported integration of a 1,700-person acquisition: API built from Workday to Sage",
+        "Fixed global JML process — new joiner success rate increased from 40% to 90%",
+        "Designed ATS-to-HRIS integration reducing manual intervention and increasing data accuracy",
+        "Introduced ITIL-aligned 'Front Door' process for system development requests",
+        "Built Power BI dashboards for HR monthly and quarterly reporting",
+      ],
+    },
+    {
+      title: "HR Operations Manager", company: "Davies Group", url: "www.davies-group.com", period: "Jun 2023 – Dec 2024",
+      context: "Led a team of 12 providing full lifecycle HR Operations support to c.4,000 colleagues in the UK & Ireland.",
+      companyContext: "Global insurance services provider · 9,000+ employees",
+      achievements: ["100% compliance and pass rates on all internal and external HR audits","Sourced and implemented global ATS (Pinpoint) — rolled out to UK and India","Used AI and Power Automate to improve team efficiency and reduce manual data entry","Built automated referencing tool saving hundreds of hours per year","Designed improved onboarding process leveraging systems to enhance colleague experience","Removed bottlenecks in systems access, saving hours of work per team member per week"],
+    },
+    {
+      title: "HR Business Partner – Projects", company: "Davies Group", url: "www.davies-group.com", period: "May 2022 – May 2023",
+      context: "Reporting to the UK HRD on UK-based HR projects across the group.",
+      companyContext: "Global insurance services provider · 8,000+ employees",
+      achievements: ["Introduced new reporting system for Talent Acquisition — previously no data or tracker existed","Created automated exit feedback process driving greater response rates and NPS tracking","Built reporting dashboards for HRBPs' board reports; created ENPS survey and reporting","Led pay harmonisation project within the UK division"],
+    },
+    {
+      title: "People & Culture Partner", company: "Nasstar", url: "www.nasstar.com", period: "Aug 2021 – Apr 2022",
+      context: "Supporting the Group and Sales functions (c.250 employees) at this IT services provider.",
+      companyContext: "IT services provider · £200m turnover · 1,100 employees · UK & Malaysia",
+      achievements: ["Partnered with divisional heads to improve culture and performance","Conducted monthly talent reviews using data-driven insights for management teams","Led HR project work on performance management — trialling modernised review processes"],
+    },
+    {
+      title: "Group HR Manager", company: "Nasstar (Formerly GCI)", url: "www.nasstar.com", period: "Jun 2019 – Aug 2021",
+      context: "Managed the HR Shared Services function (4 reports) with responsibility for HR operations, policy, compliance and GDPR. Provided support and mentoring to recruitment and business partnering teams.",
+      companyContext: "UK-based IT services company · 900 employees globally",
+      achievements: ["Procured and implemented new HRIS (HiBob)","Conducted salary mapping of all 700 roles to Towers Watson market data","Managed 2021 salary increases working to a budget of £900k","Consolidated 3 payrolls and pension schemes into one including TUPE transfers","Managed headcount reductions including c.40 roles in 2019","Automated common HR processes using Microsoft Power Automate"],
+    },
+    {
+      title: "HR Manager", company: "U Account", url: "www.uaccount.uk", period: "Nov 2018 – May 2019",
+      context: "Led the HR function at this fintech company, reporting to the CFO and implementing the People plan.",
+      companyContext: "Fintech providing alternative banking products",
+      achievements: ["Introduced HR reporting and metrics for the first time — invited to monthly Exec meetings","Improved and in-housed payroll, saving outsourcing fees","Provided weekly coaching to an inexperienced management team","Sourced and implemented new LMS and HRIS"],
+    },
+    {
+      title: "HR Advisor", company: "GCI Network Solutions", url: "www.gcicom.net", period: "Nov 2016 – Nov 2018",
+      context: "Led day-to-day HR activities with 3 direct reports. Provided advice and training to managers on ER issues, managed caseload including disciplinary hearings.",
+      companyContext: "IT network solutions provider",
+      achievements: ["Won Employee of the Month in only second month with the business","Introduced improved HR reporting and analytics for monthly board reports","Sourced and implemented a new Learning Management System","Harmonised three HR systems into one group-wide system","Reduced recruitment costs by £50,000 per annum","Led apprenticeship levy rollout and GDPR project"],
+    },
+    {
+      title: "Retail Management", company: "Halfords & Waterstones", period: "Sep 2004 – Aug 2015",
+      context: "Progressive retail management career including Manager at Halfords, Assistant Manager and Lead Bookseller at Waterstones across multiple locations.",
+      achievements: [],
+    },
+  ],
+  projects: [
+    {
+      title: "Global ATS Rollout", subtitle: "Pinpoint", icon: "🌍", color: "#B8860B",
+      summary: "Sourced, implemented and rolled out a global Applicant Tracking System across UK, India, US and APAC.",
+      detail: {
+        challenge: "Davies Group had no unified recruitment platform. Hiring practices varied by region, data was siloed, and there was no visibility into recruitment performance across the business.",
+        approach: "Led a full procurement process to select Pinpoint as the global ATS. Managed stakeholder alignment across multiple regions, designed standardised recruitment workflows, and planned a phased rollout starting with UK and India before expanding to US and APAC.",
+        impact: ["2,000+ successful hires processed through the platform since launch in October 2024","Streamlined recruitment practices and onboarding efficiencies across all regions","Designed integration between ATS and HRIS reducing manual data entry","Provided recruitment analytics and reporting for the first time globally"],
+        tools: ["Pinpoint", "Sage People", "API Integrations"],
+      },
+    },
+    {
+      title: "HiBob Implementation", subtitle: "HRIS Transformation", icon: "🔄", color: "#7B6B5D",
+      summary: "Identified HiBob as a future market leader while still relatively unknown, and led a full HRIS implementation at Nasstar — complicated by a 400-person acquisition mid-rollout.",
+      detail: {
+        challenge: "Nasstar's existing HRIS was built for smaller SMEs and couldn't keep pace with a growing, enterprise-scale business. The system lacked the flexibility and depth needed for robust people operations, reporting and employee experience.",
+        approach: "Conducted a thorough market search to find an enterprise-ready solution. Identified HiBob early — before they became a well-known player in the HR Tech space — recognising their potential based on product roadmap, UX and scalability. Led the full procurement and implementation. Mid-rollout, Nasstar acquired a 400-strong business, requiring rapid data mapping and onboarding of the new workforce into the platform at the same time.",
+        impact: ["Successfully implemented a modern, enterprise-grade HRIS across the organisation","Spotted and backed HiBob before they became a mainstream HR Tech name","Seamlessly absorbed a 400-person acquisition into the new system during rollout","Delivered improved reporting, employee self-service and HR process automation"],
+        tools: ["HiBob", "Data Migration", "TUPE", "Change Management"],
+      },
+    },
+    {
+      title: "HR Tech Team — India", subtitle: "Offshore Build", icon: "🏗️", color: "#8B6F4E",
+      summary: "Built a brand new HR Technology team in India from scratch to offshore BAU activities from the UK.",
+      detail: {
+        challenge: "The UK HR Technology team was overwhelmed with BAU support tickets, leaving almost no capacity for strategic projects and continuous improvement work.",
+        approach: "Designed the team structure, role profiles and operating model. Led recruitment and onboarding of new team members in India. Established processes, SLAs and knowledge transfer frameworks to ensure quality.",
+        impact: ["UK team freed up 40% more time for projects and continuous improvements","BAU activities handled efficiently with defined SLAs","Created Davies Group's first HR technology strategy with KPIs","Enabled the UK team to focus on automation and digital transformation"],
+        tools: ["Service Desk", "ITIL Processes", "Knowledge Management"],
+      },
+    },
+    {
+      title: "JML Process Fix", subtitle: "40% → 90% Success", icon: "🔧", color: "#B8860B",
+      summary: "Solved a global Joiners, Movers, Leavers process failure that was preventing new starters from receiving equipment on time.",
+      detail: {
+        challenge: "The Joiners, Movers, Leavers (JML) process was broken — only 40% of new joiners were receiving their equipment on time. Data wasn't flowing correctly between HR and IT systems, causing delays, frustration and a poor first impression for new starters.",
+        approach: "Partnered with Group IT to diagnose the root causes. Solutionised a fix involving improved data flows, system triggers and process redesign to ensure accurate, timely equipment provisioning for all new joiners.",
+        impact: ["New joiner equipment success rate increased from 40% to 90%","Improved data accuracy between HR and IT systems","Better new starter experience and first impressions","Reduced support tickets and manual chasing by the HR and IT teams"],
+        tools: ["HRIS", "IT Service Management", "Process Automation"],
+      },
+    },
+    {
+      title: "1,700-Person Acquisition", subtitle: "Systems Integration", icon: "🤝", color: "#A0522D",
+      summary: "Supported the acquisition and integration of a 1,700-colleague business ensuring smooth data and systems transition.",
+      detail: {
+        challenge: "A major acquisition brought 1,700 new colleagues into Davies Group. Their data lived in Workday while Davies used Sage — two fundamentally different HRIS platforms that needed to work together.",
+        approach: "Worked with Group IT and the acquired business to map data structures, design migration plans and build a custom API integration between Workday and Sage People. Ensured data accuracy throughout the transition.",
+        impact: ["Smooth data and systems transition for 1,700 colleagues","Custom API built between Workday and Sage People","Zero disruption to payroll and core HR processes during transition","Established integration patterns reusable for future acquisitions"],
+        tools: ["Workday", "Sage People", "Custom API", "Data Migration Tools"],
+      },
+    },
+    {
+      title: "Automated Referencing", subtitle: "Power Automate", icon: "⚡", color: "#CD853F",
+      summary: "Designed and built an automated employee referencing tool using Power Automate, saving hundreds of hours annually.",
+      detail: {
+        challenge: "Employee referencing was entirely manual — HR team members were spending significant time chasing, sending and logging reference requests for every new hire. The process was slow, error-prone and a major bottleneck.",
+        approach: "Mapped the end-to-end referencing workflow, identified automation opportunities, and built a Power Automate flow to handle request sending, chasing, logging and status tracking automatically.",
+        impact: ["Hundreds of hours saved across the HR Operations team per year","Faster reference turnaround times improving time-to-hire","Reduced human error in reference tracking and logging","Freed team capacity for higher-value work"],
+        tools: ["Microsoft Power Automate", "Outlook", "SharePoint"],
+      },
+    },
+  ],
+  personal: {
+    intro: "Beyond the spreadsheets and system implementations, here's a bit about who I am.",
+    hobbies: [
+      { icon: "⚽", title: "Football", description: "Lifelong Manchester United fan. Recently started coaching my daughter's U9s team — earned my first FA badge and now spend my evenings researching drills like it's a scouting report." },
+      { icon: "⛳", title: "Golf", description: "A constant battle between me and the course. I use TheGrint to track every round and Garmin for practice sessions — my handicap might not show it, but the dashboards look great." },
+      { icon: "📚", title: "Reading", description: "Fiction, business, tech, maths and statistics — my reading list is all over the place. If it makes me think differently, I'm in." },
+      { icon: "🏃", title: "Running", description: "Completed Couch to 5K last year and caught the bug. This year's mission: a 10K. My Garmin tracks every split — because of course it does." },
+      { icon: "🤖", title: "Technology", description: "Self-confessed gadget nerd. If it's new and shiny, I'm already reading the reviews. I love tinkering with AI tools like Claude Code, diving into data, and figuring out how things work — it's basically my hobby and my job description." },
+      { icon: "✈️", title: "Travel", description: "Exploring new cities and countries with my family. Half the fun is the planning — the other half is the kids discovering somewhere totally new." },
+    ],
+    values: [
+      { title: "Curiosity", text: "I'm happiest when I'm learning something new — whether that's a new system, a new skill, or a new way of thinking." },
+      { title: "Data-Driven Decision Making", text: "Gut feeling is fine for picking lunch — for everything else, I want the data. I believe better decisions come from better insights, and I'll build the dashboard to prove it." },
+      { title: "People First", text: "Technology should serve people, not the other way round. Every system I build starts with the human experience." },
+      { title: "Problem Solving", text: "Give me a broken process and I'm in my element. I love unpicking why something doesn't work, finding the root cause, and designing a fix that actually sticks." },
+    ],
+  },
+  education: [
+    { institution: "Sheffield Hallam University", year: "2015–2016", qualification: "MSc Human Resource Management — Distinction", note: "Keith Thrustle Prize winner for highest overall average mark" },
+    { institution: "University of Leicester", year: "2001–2004", qualification: "Law LLB" },
+  ],
+  skills: {
+    "HRIS": ["HiBob", "Sage People", "Cascade", "PeopleHR"],
+    "ATS": ["Pinpoint", "Teamtailor", "Networx", "Workable"],
+    "Data & Reporting": ["Power BI", "Tableau", "Advanced Excel", "Power Automate"],
+    "HR Expertise": ["M&A & TUPE", "Reward Management", "Process Automation", "Talent Acquisition", "Employee Relations", "Business Process Improvement", "Performance Management", "Employee Engagement", "Salary Benchmarking", "Payroll", "Project Management"],
+  },
+  sectors: [
+    { icon: "💻", name: "Technology", desc: "IT services, SaaS & infrastructure" },
+    { icon: "⚖️", name: "Legal", desc: "Law firms & legal services" },
+    { icon: "🏦", name: "Finance & Insurance", desc: "Global insurance & financial services" },
+    { icon: "🚀", name: "Fintech", desc: "Alternative banking & digital finance" },
+    { icon: "🤝", name: "Professional Services", desc: "Consulting & business services" },
+  ],
+};
+
+// ─── Animated Counter ────────────────────────────────────────
+function AnimatedStat({ value, suffix, label, delay = 0 }) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting && !started) setStarted(true); }, { threshold: 0.3 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [started]);
+  useEffect(() => {
+    if (!started) return;
+    const timeout = setTimeout(() => {
+      const duration = 1600, steps = 40, increment = value / steps;
+      let current = 0;
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= value) { setCount(value); clearInterval(interval); }
+        else setCount(Math.floor(current));
+      }, duration / steps);
+      return () => clearInterval(interval);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [started, value, delay]);
+  return (
+    <div ref={ref} style={{ textAlign: "center", padding: "24px 16px", opacity: started ? 1 : 0, transform: started ? "translateY(0)" : "translateY(20px)", transition: `all 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms` }}>
+      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 700, color: "#B8860B", lineHeight: 1.1 }}>{count.toLocaleString()}{suffix}</div>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#8B7D6B", marginTop: "8px", fontWeight: 500 }}>{label}</div>
+    </div>
+  );
+}
+
+// ─── Role Card ───────────────────────────────────────────────
+function RoleCard({ role, index }) {
+  const [open, setOpen] = useState(false);
+  const reveal = useScrollReveal(0.1);
+  return (
+    <div ref={reveal.ref} style={{ ...reveal.style, transitionDelay: `${index * 60}ms`, background: open ? "#FFFAF5" : "#FDFBF7", border: "1px solid", borderColor: open ? "#C2703E40" : "#E8E0D4", borderRadius: "12px", marginBottom: "12px", overflow: "hidden", cursor: "pointer" }}
+      onClick={() => setOpen(!open)}
+      onMouseEnter={(e) => { if (!open) e.currentTarget.style.borderColor = "#C2703E60"; }}
+      onMouseLeave={(e) => { if (!open) e.currentTarget.style.borderColor = "#E8E0D4"; }}>
+      <div style={{ padding: "20px 24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "16px", color: "#2D2419" }}>{role.title}</span>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: "#B8860B", fontWeight: 500 }}>{role.company}</span>
+          </div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "#8B7D6B", marginTop: "4px" }}>{role.period}</div>
+        </div>
+        <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: open ? "#C2703E" : "#F0E8DC", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s ease", flexShrink: 0 }}>
+          <span style={{ color: open ? "#FFF" : "#C2703E", fontSize: "16px", transform: open ? "rotate(45deg)" : "rotate(0deg)", transition: "transform 0.3s ease", lineHeight: 1 }}>+</span>
+        </div>
+      </div>
+      <div style={{ maxHeight: open ? "800px" : "0", opacity: open ? 1 : 0, transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)", overflow: "hidden" }}>
+        <div style={{ padding: "0 24px 24px", borderTop: "1px solid #E8E0D4" }}>
+          {role.companyContext && <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: "#8B7D6B", letterSpacing: "0.5px", textTransform: "uppercase", marginTop: "16px", marginBottom: "8px" }}>{role.companyContext}</div>}
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: "#4A3F35", margin: "12px 0" }}>{role.context}</p>
+          {role.achievements.length > 0 && <div style={{ marginTop: "12px" }}>
+            {role.achievements.map((a, i) => (
+              <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "8px", alignItems: "flex-start" }}>
+                <span style={{ color: "#B8860B", fontSize: "8px", marginTop: "6px", flexShrink: 0 }}>●</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13.5px", lineHeight: 1.6, color: "#4A3F35" }}>{a}</span>
+              </div>
+            ))}
+          </div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Project Modal ───────────────────────────────────────────
+function ProjectModal({ project, onClose }) {
+  if (!project) return null;
+  const d = project.detail;
+  return (
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(30,24,18,0.6)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: "20px", animation: "fadeIn 0.25s ease" }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ background: "#FDFBF7", borderRadius: "16px", maxWidth: "640px", width: "100%", maxHeight: "80vh", overflow: "auto", padding: "40px", position: "relative", animation: "scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1)" }}>
+        <button onClick={onClose} style={{ position: "absolute", top: "16px", right: "16px", background: "#F0E8DC", border: "none", borderRadius: "50%", width: "32px", height: "32px", cursor: "pointer", fontSize: "16px", color: "#8B7D6B", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
+        <div style={{ fontSize: "32px", marginBottom: "8px" }}>{project.icon}</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "24px", fontWeight: 700, color: "#2D2419", margin: "0 0 4px" }}>{project.title}</h2>
+        <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: project.color, fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", marginBottom: "20px" }}>{project.subtitle}</div>
+        <Section title="The Challenge" text={d.challenge} />
+        <Section title="The Approach" text={d.approach} />
+        <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", margin: "24px 0 12px", fontWeight: 600 }}>Impact</h4>
+        {d.impact.map((item, i) => (
+          <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "6px", alignItems: "flex-start" }}>
+            <span style={{ color: "#B8860B", fontSize: "8px", marginTop: "6px", flexShrink: 0 }}>●</span>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.6, color: "#4A3F35" }}>{item}</span>
+          </div>
+        ))}
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "20px" }}>
+          {d.tools.map((tool, i) => (
+            <span key={i} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", background: "#F0E8DC", color: "#6B5D4F", padding: "4px 12px", borderRadius: "20px", fontWeight: 500 }}>{tool}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Section({ title, text }) {
+  return (
+    <>
+      <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", margin: "24px 0 8px", fontWeight: 600 }}>{title}</h4>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: "#4A3F35", margin: 0 }}>{text}</p>
+    </>
+  );
+}
+
+// ─── Project Tile ────────────────────────────────────────────
+function ProjectTile({ project, onClick, index }) {
+  const [hovered, setHovered] = useState(false);
+  const reveal = useScrollReveal(0.1);
+  return (
+    <div ref={reveal.ref} onClick={onClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      style={{ ...reveal.style, transitionDelay: `${index * 100}ms`, background: hovered ? "#FFFAF5" : "#FDFBF7", border: "1px solid", borderColor: hovered ? project.color + "60" : "#E8E0D4", borderRadius: "12px", padding: "28px 24px", cursor: "pointer", transform: reveal.visible ? (hovered ? "translateY(-3px)" : "translateY(0)") : "translateY(24px)", boxShadow: hovered ? "0 8px 30px rgba(0,0,0,0.06)" : "none" }}>
+      <div style={{ fontSize: "28px", marginBottom: "12px" }}>{project.icon}</div>
+      <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "16px", color: "#2D2419", margin: "0 0 4px" }}>{project.title}</h3>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: project.color, fontWeight: 600, letterSpacing: "0.5px", textTransform: "uppercase", marginBottom: "12px" }}>{project.subtitle}</div>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13.5px", lineHeight: 1.6, color: "#6B5D4F", margin: 0 }}>{project.summary}</p>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: project.color, marginTop: "16px", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px" }}>
+        View full breakdown <span style={{ transition: "transform 0.2s", transform: hovered ? "translateX(3px)" : "none", display: "inline-block" }}>→</span>
+      </div>
+    </div>
+  );
+}
+
+// ─── Small Card Components ───────────────────────────────────
+function SectorCard({ sector, index }) {
+  const [hovered, setHovered] = useState(false);
+  const reveal = useScrollReveal(0.1);
+  return (
+    <div ref={reveal.ref} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      style={{ ...reveal.style, transitionDelay: `${index * 80}ms`, background: hovered ? "#FFFAF5" : "#FDFBF7", border: "1px solid", borderColor: hovered ? "#C2703E40" : "#E8E0D4", borderRadius: "12px", padding: "20px", transform: reveal.visible ? (hovered ? "translateY(-2px)" : "translateY(0)") : "translateY(24px)" }}>
+      <div style={{ fontSize: "26px", marginBottom: "10px" }}>{sector.icon}</div>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "15px", color: "#2D2419", marginBottom: "4px" }}>{sector.name}</div>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12.5px", lineHeight: 1.5, color: "#8B7D6B" }}>{sector.desc}</div>
+    </div>
+  );
+}
+
+function ValueCard({ value, index }) {
+  const reveal = useScrollReveal(0.1);
+  return (
+    <div ref={reveal.ref} style={{ ...reveal.style, transitionDelay: `${index * 100}ms`, background: "#FDFBF7", border: "1px solid #E8E0D4", borderRadius: "12px", padding: "24px" }}>
+      <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontSize: "18px", color: "#B8860B", marginBottom: "8px" }}>{value.title}</div>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", lineHeight: 1.7, color: "#4A3F35", margin: 0 }}>{value.text}</p>
+    </div>
+  );
+}
+
+function HobbyCard({ hobby, index }) {
+  const [hovered, setHovered] = useState(false);
+  const reveal = useScrollReveal(0.1);
+  return (
+    <div ref={reveal.ref} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      style={{ ...reveal.style, transitionDelay: `${index * 80}ms`, background: hovered ? "#FFFAF5" : "#FDFBF7", border: "1px solid", borderColor: hovered ? "#C2703E40" : "#E8E0D4", borderRadius: "12px", padding: "20px", transform: reveal.visible ? (hovered ? "translateY(-2px)" : "translateY(0)") : "translateY(24px)" }}>
+      <div style={{ fontSize: "24px", marginBottom: "10px" }}>{hobby.icon}</div>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "14px", color: "#2D2419", marginBottom: "4px" }}>{hobby.title}</div>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", lineHeight: 1.5, color: "#6B5D4F" }}>{hobby.description}</div>
+    </div>
+  );
+}
+
+// ─── Main App ────────────────────────────────────────────────
+export default function DigitalCV() {
+  const [activeTab, setActiveTab] = useState("career");
+  const [selectedProject, setSelectedProject] = useState(null);
+  const tabs = [
+    { id: "career", label: "My Career" },
+    { id: "projects", label: "My Projects" },
+    { id: "personal", label: "My Personal Life" },
+  ];
+
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D4C8B8; border-radius: 3px; }
+      `}</style>
+
+      <div style={{ minHeight: "100vh", background: "linear-gradient(180deg, #FAF6F0 0%, #F5EDE3 100%)", fontFamily: "'DM Sans', sans-serif" }}>
+        {/* ── Hero ── */}
+        <header style={{ padding: "60px 24px 40px", maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
+          <img src="data:image/jpeg;base64,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" alt="James Brabbs"
+            style={{ width: "110px", height: "110px", borderRadius: "50%", objectFit: "cover", margin: "0 auto 24px", display: "block", border: "3px solid #FDFBF7", boxShadow: "0 4px 20px rgba(0,0,0,0.08)", animation: "fadeSlideIn 0.6s ease both" }} />
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 700, color: "#2D2419", lineHeight: 1.15, marginBottom: "8px", animation: "fadeSlideIn 0.6s ease 100ms both" }}>{CV_DATA.name}</h1>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginBottom: "16px", fontWeight: 500, animation: "fadeSlideIn 0.6s ease 200ms both" }}>{CV_DATA.credentials}</div>
+          <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(16px, 2.5vw, 20px)", fontStyle: "italic", color: "#B8860B", lineHeight: 1.5, maxWidth: "500px", margin: "0 auto", animation: "fadeSlideIn 0.6s ease 300ms both" }}>"{CV_DATA.tagline}"</p>
+        </header>
+
+        {/* ── Tabs ── */}
+        <nav style={{ display: "flex", justifyContent: "center", gap: "8px", padding: "0 24px 32px", maxWidth: "600px", margin: "0 auto", animation: "fadeSlideIn 0.6s ease 400ms both" }}>
+          {tabs.map((tab) => (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", fontWeight: activeTab === tab.id ? 600 : 400, color: activeTab === tab.id ? "#FDFBF7" : "#6B5D4F", background: activeTab === tab.id ? "#C2703E" : "transparent", border: "1.5px solid", borderColor: activeTab === tab.id ? "#C2703E" : "#D4C8B8", borderRadius: "24px", padding: "10px 24px", cursor: "pointer", transition: "all 0.25s ease", whiteSpace: "nowrap" }}>{tab.label}</button>
+          ))}
+        </nav>
+
+        {/* ── Content ── */}
+        <main style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px 80px" }}>
+
+          {/* CAREER TAB */}
+          {activeTab === "career" && (
+            <div style={{ animation: "fadeSlideIn 0.4s ease both" }}>
+              <div style={{ background: "#FDFBF7", border: "1px solid #E8E0D4", borderRadius: "12px", padding: "28px", marginBottom: "32px" }}>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", lineHeight: 1.8, color: "#4A3F35" }}>{CV_DATA.summary}</p>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", marginBottom: "40px" }}>
+                {CV_DATA.stats.map((stat, i) => <AnimatedStat key={i} {...stat} delay={i * 150} />)}
+              </div>
+
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginBottom: "16px", fontWeight: 600 }}>Experience</div>
+              <div style={{ position: "relative", paddingLeft: "28px" }}>
+                <div style={{ position: "absolute", left: "7px", top: "8px", bottom: "8px", width: "2px", background: "linear-gradient(to bottom, #C2703E, #E8E0D4)", borderRadius: "1px" }} />
+                {CV_DATA.roles.map((role, i) => (
+                  <div key={i} style={{ position: "relative" }}>
+                    <div style={{ position: "absolute", left: "-28px", top: "24px", width: "16px", height: "16px", borderRadius: "50%", background: i === 0 ? "#C2703E" : "#FDFBF7", border: "2px solid", borderColor: i === 0 ? "#C2703E" : "#C2703E80", zIndex: 1, transition: "all 0.3s ease" }} />
+                    <RoleCard role={role} index={i} />
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginTop: "40px", marginBottom: "16px", fontWeight: 600 }}>Education</div>
+              {CV_DATA.education.map((edu, i) => (
+                <div key={i} style={{ background: "#FDFBF7", border: "1px solid #E8E0D4", borderRadius: "12px", padding: "20px 24px", marginBottom: "10px" }}>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: "15px", color: "#2D2419" }}>{edu.qualification}</div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "#B8860B", marginTop: "4px" }}>{edu.institution} · {edu.year}</div>
+                  {edu.note && <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "#8B7D6B", marginTop: "6px", fontStyle: "italic" }}>{edu.note}</div>}
+                </div>
+              ))}
+
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginTop: "40px", marginBottom: "16px", fontWeight: 600 }}>Skills & Tools</div>
+              <div style={{ background: "#FDFBF7", border: "1px solid #E8E0D4", borderRadius: "12px", padding: "24px" }}>
+                {Object.entries(CV_DATA.skills).map(([cat, items], ci) => (
+                  <div key={ci} style={{ marginBottom: ci < Object.entries(CV_DATA.skills).length - 1 ? "16px" : 0 }}>
+                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", fontWeight: 600, color: "#6B5D4F", marginBottom: "8px" }}>{cat}</div>
+                    <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                      {items.map((item, ii) => <span key={ii} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", background: "#F0E8DC", color: "#6B5D4F", padding: "4px 12px", borderRadius: "20px", fontWeight: 500 }}>{item}</span>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginTop: "40px", marginBottom: "16px", fontWeight: 600 }}>Sector Experience</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "12px" }}>
+                {CV_DATA.sectors.map((sector, i) => <SectorCard key={i} sector={sector} index={i} />)}
+              </div>
+            </div>
+          )}
+
+          {/* PROJECTS TAB */}
+          {activeTab === "projects" && (
+            <div style={{ animation: "fadeSlideIn 0.4s ease both" }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", lineHeight: 1.7, color: "#6B5D4F", marginBottom: "28px", textAlign: "center" }}>A closer look at the projects that have shaped my career. Click any tile for the full story.</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "16px" }}>
+                {CV_DATA.projects.map((p, i) => <ProjectTile key={i} project={p} index={i} onClick={() => setSelectedProject(p)} />)}
+              </div>
+            </div>
+          )}
+
+          {/* PERSONAL TAB */}
+          {activeTab === "personal" && (
+            <div style={{ animation: "fadeSlideIn 0.4s ease both" }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", lineHeight: 1.7, color: "#6B5D4F", marginBottom: "32px", textAlign: "center", fontStyle: "italic" }}>{CV_DATA.personal.intro}</p>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginBottom: "16px", fontWeight: 600 }}>Things I love</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "12px", marginBottom: "40px" }}>
+                {CV_DATA.personal.hobbies.map((h, i) => <HobbyCard key={i} hobby={h} index={i} />)}
+              </div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#8B7D6B", marginBottom: "16px", fontWeight: 600 }}>What drives me</div>
+              <div style={{ display: "grid", gap: "12px" }}>
+                {CV_DATA.personal.values.map((v, i) => <ValueCard key={i} value={v} index={i} />)}
+              </div>
+            </div>
+          )}
+        </main>
+
+        {/* ── Footer ── */}
+        <footer style={{ textAlign: "center", padding: "24px", borderTop: "1px solid #E8E0D4" }}>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "#8B7D6B" }}>
+            james_brabbs@hotmail.com · 07766 144518 · <a href="https://www.linkedin.com/in/james-brabbs/" target="_blank" rel="noopener noreferrer" style={{ color: "#B8860B", textDecoration: "none" }}>LinkedIn</a>
+          </div>
+        </footer>
+      </div>
+
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+    </>
+  );
+}
