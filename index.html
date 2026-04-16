@@ -245,15 +245,15 @@
     <!-- CAREER TAB -->
     <div class="tab-content active" id="tab-career">
       <div class="card" style="padding: 28px; margin-bottom: 32px;">
-        <p style="font-size: 15px; line-height: 1.8;">A CIPD Level 7 qualified HR leader with a Master's in HRM and a background in Law. I specialise in HR Technology, digital transformation, and aligning people strategies with commercial objectives in high-growth, M&amp;A environments. I turn manual, fragmented HR operations into automated, data-driven ecosystems, and I build the teams to sustain them.</p>
+        <p style="font-size: 15px; line-height: 1.8;">A CIPD Level 7 qualified HR leader with a Master's in HRM and a background in Law. I specialise in HR Technology, digital transformation, and aligning people strategies with commercial objectives in high-growth, M&amp;A environments. I turn manual, fragmented HR operations into automated, data-driven ecosystems — and I build the teams to sustain them.</p>
       </div>
 
       <!-- Stats -->
       <div class="stats-grid" id="stats-container">
         <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="10" data-suffix="+">0+</div><div class="stat-label">Years in HR</div></div>
-        <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="5" data-suffix="+">0+</div><div class="stat-label">HR System Implementations</div></div>
-        <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="100" data-suffix="'s">0's</div><div class="stat-label">Of Hours Automated</div></div>
-        <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="2000" data-suffix="+">0+</div><div class="stat-label">Hires via ATS Rollout</div></div>
+        <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="6" data-suffix="+">0+</div><div class="stat-label">HR System Implementations</div></div>
+        <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="160" data-suffix="k+">0k+</div><div class="stat-label">Applications via ATS</div></div>
+        <div class="stat scroll-reveal"><div class="stat-value font-display" data-target="90" data-suffix="%">0%</div><div class="stat-label">JML Success Rate</div></div>
       </div>
 
       <!-- Experience -->
@@ -275,7 +275,7 @@
 
     <!-- PROJECTS TAB -->
     <div class="tab-content" id="tab-projects">
-      <p class="projects-intro">A closer look at the projects that have shaped my career. Click any tile for the full story.</p>
+      <p class="projects-intro">Six projects that shaped my career — each one a real problem, a real solution, and a measurable outcome. Click any tile for the full story.</p>
       <div class="projects-grid" id="projects-grid"></div>
     </div>
 
@@ -302,23 +302,213 @@
 <script>
 // ─── DATA ────────────────────────────────────────────────────
 const roles = [
-  { title: "Head of HR Technology & Reporting", company: "Davies Group", period: "Jan 2025 – Present", companyContext: "Global insurance services provider · 9,000+ employees · UK, USA, Canada & India · $1.1b+ turnover", context: "Promoted into a newly created role leading all global HR systems and reporting. Managing a team of 4 systems and reporting analysts, working cross-functionally to enhance HR systems, processes and integrations. Focus on digitalising HR processes and driving automation and AI deployment.", achievements: ["Created Davies Group's first HR technology strategy with KPIs and SLAs","Built a new HR Technology team from scratch in India, freeing UK team for 40% more project focus","Led global ATS rollout to US and APAC — 2,000+ successful hires since launch in October 2024","Supported integration of a 1,700-person acquisition: API built from Workday to Sage","Fixed global JML process — new joiner success rate increased from 40% to 90%","Designed ATS-to-HRIS integration reducing manual intervention and increasing data accuracy","Introduced ITIL-aligned 'Front Door' process for system development requests","Built Power BI dashboards for HR monthly and quarterly reporting"] },
-  { title: "HR Operations Manager", company: "Davies Group", period: "Jun 2023 – Dec 2024", companyContext: "Global insurance services provider · 9,000+ employees", context: "Led a team of 12 providing full lifecycle HR Operations support to c.4,000 colleagues in the UK & Ireland.", achievements: ["100% compliance and pass rates on all internal and external HR audits","Sourced and implemented global ATS (Pinpoint) — rolled out to UK and India","Used AI and Power Automate to improve team efficiency and reduce manual data entry","Built automated referencing tool saving hundreds of hours per year","Designed improved onboarding process leveraging systems to enhance colleague experience","Removed bottlenecks in systems access, saving hours of work per team member per week"] },
-  { title: "HR Business Partner – Projects", company: "Davies Group", period: "May 2022 – May 2023", companyContext: "Global insurance services provider · 8,000+ employees", context: "Reporting to the UK HRD on UK-based HR projects across the group.", achievements: ["Introduced new reporting system for Talent Acquisition — previously no data or tracker existed","Created automated exit feedback process driving greater response rates and NPS tracking","Built reporting dashboards for HRBPs' board reports; created ENPS survey and reporting","Led pay harmonisation project within the UK division"] },
-  { title: "People & Culture Partner", company: "Nasstar", period: "Aug 2021 – Apr 2022", companyContext: "IT services provider · £200m turnover · 1,100 employees · UK & Malaysia", context: "Supporting the Group and Sales functions (c.250 employees) at this IT services provider.", achievements: ["Partnered with divisional heads to improve culture and performance","Conducted monthly talent reviews using data-driven insights for management teams","Led HR project work on performance management — trialling modernised review processes"] },
-  { title: "Group HR Manager", company: "Nasstar (Formerly GCI)", period: "Jun 2019 – Aug 2021", companyContext: "UK-based IT services company · 900 employees globally", context: "Managed the HR Shared Services function (4 reports) with responsibility for HR operations, policy, compliance and GDPR. Provided support and mentoring to recruitment and business partnering teams.", achievements: ["Procured and implemented new HRIS (HiBob)","Conducted salary mapping of all 700 roles to Towers Watson market data","Managed 2021 salary increases working to a budget of £900k","Consolidated 3 payrolls and pension schemes into one including TUPE transfers","Managed headcount reductions including c.40 roles in 2019","Automated common HR processes using Microsoft Power Automate"] },
-  { title: "HR Manager", company: "U Account", period: "Nov 2018 – May 2019", companyContext: "Fintech providing alternative banking products", context: "Led the HR function at this fintech company, reporting to the CFO and implementing the People plan.", achievements: ["Introduced HR reporting and metrics for the first time — invited to monthly Exec meetings","Improved and in-housed payroll, saving outsourcing fees","Provided weekly coaching to an inexperienced management team","Sourced and implemented new LMS and HRIS"] },
-  { title: "HR Advisor", company: "GCI Network Solutions", period: "Nov 2016 – Nov 2018", companyContext: "IT network solutions provider", context: "Led day-to-day HR activities with 3 direct reports. Provided advice and training to managers on ER issues, managed caseload including disciplinary hearings.", achievements: ["Won Employee of the Month in only second month with the business","Introduced improved HR reporting and analytics for monthly board reports","Sourced and implemented a new Learning Management System","Harmonised three HR systems into one group-wide system","Reduced recruitment costs by £50,000 per annum","Led apprenticeship levy rollout and GDPR project"] },
-  { title: "Retail Management", company: "Halfords & Waterstones", period: "Sep 2004 – Aug 2015", context: "Progressive retail management career including Manager at Halfords, Assistant Manager and Lead Bookseller at Waterstones across multiple locations.", achievements: [] },
+  {
+    title: "Head of HR Technology & Reporting", company: "Davies Group", period: "Jan 2025 – Present",
+    companyContext: "Global insurance services provider · 9,000+ employees · UK, USA, Canada & India · $1.1b+ turnover",
+    context: "Promoted into a newly created role leading all global HR systems and reporting. Managing a team of 4 systems and reporting analysts, working cross-functionally to enhance HR systems, processes and integrations. Focus on digitalising HR processes and driving automation and AI deployment.",
+    sections: [
+      {
+        label: "Strategy & Leadership",
+        achievements: [
+          "Created Davies Group's first HR Technology Strategy, introducing formal KPIs and SLAs into the function for the first time",
+          "Built a new HR Technology team in India from scratch, offshoring BAU activities from the UK team and delivering a 40% increase in UK capacity for project and continuous improvement work",
+          "Introduced an ITIL-aligned 'front door' process for system development requests, bringing the HR Technology function in line with Group IT governance standards",
+        ]
+      },
+      {
+        label: "Systems & Integration",
+        achievements: [
+          "Led the global rollout of Pinpoint ATS across the US and APAC — managing over 160,000 applications and delivering 1,550+ hires in 2025 alone, at an average time-to-hire of 18 days",
+          "Designed and delivered a direct API integration between Pinpoint ATS and Sage People HRIS, eliminating manual data entry between systems and materially improving data accuracy",
+          "Supported the acquisition and integration of a 1,700-employee business, building a custom API between Workday and Sage People to ensure seamless data transition",
+          "Diagnosed and resolved a critical failure in the global JML process — increasing new joiner equipment success rates from 40% to 90%, directly improving day-one experience at scale",
+        ]
+      },
+      {
+        label: "Data, Reporting & Governance",
+        achievements: [
+          "Designed and built a Power BI Data Governance Tool connected via API to Sage People, providing real-time visibility of data accuracy across the HR system and flagging incomplete or incorrect fields at source",
+          "Developed a suite of Power BI compliance dashboards tracking mandatory training completion across c.8,000 employees globally — giving CISO, Privacy and HR teams real-time, self-serve intelligence",
+          "Introduced Power BI dashboards for monthly and quarterly HR reporting, replacing manual processes and enabling evidence-based decision making at senior leadership level",
+        ]
+      },
+    ]
+  },
+  {
+    title: "HR Operations Manager", company: "Davies Group", period: "Jun 2023 – Dec 2024",
+    companyContext: "Global insurance services provider · 9,000+ employees",
+    context: "Led a team of 12 HR Operations colleagues delivering full employee lifecycle HR support to c.4,000 colleagues across the UK, Ireland and Keoghs LLP.",
+    achievements: [
+      "Drove significant improvement in SLA and KPI performance across HR Operations, introducing formal reporting mechanisms to track and maintain service standards",
+      "Achieved 100% pass rate across all internal and external HR audits, using findings as a driver for continuous process improvement",
+      "Systemised the annual salary review process for Keoghs LLP, migrating from manual spreadsheets into Sage People and incorporating Willis Towers Watson benchmarking data",
+      "Led the procurement and full rollout of Pinpoint ATS across the UK and India, consolidating multiple legacy systems into a single consistent platform",
+      "Built a Power Automate referencing tool that automated email sending and chasing, saving an estimated 250+ hours annually across c.1,000 hires per year",
+      "Designed and implemented an improved onboarding process leveraging systems and automation to enhance colleague experience whilst removing manual intervention",
+      "Used AI and Power Automate to improve team efficiency and reduce manual data entry, freeing team capacity for higher-value HR activities",
+      "Built a real-time HR Operations reporting dashboard giving HR stakeholders visibility of team activity, workload and performance for the first time",
+    ]
+  },
+  {
+    title: "HR Business Partner – Projects", company: "Davies Group", period: "May 2022 – May 2023",
+    companyContext: "Global insurance services provider · 8,000+ employees",
+    context: "Reported to the UK HR Director, leading UK-based HR projects across Davies Group.",
+    achievements: [
+      "Designed and implemented a new Talent Acquisition reporting system, introducing data and tracking capability where none had previously existed",
+      "Built an automated exit feedback process that transformed response rates from negligible to statistically meaningful — with attrition insight and NPS data embedded into monthly HR board reporting",
+      "Created eNPS survey and reporting infrastructure alongside Power BI-based board reporting dashboards, giving HRBPs consistent, data-driven tools for stakeholder reporting",
+      "Led a pay harmonisation project across the entire UK division, aligning pay structures and reducing internal pay inequity at scale",
+    ]
+  },
+  {
+    title: "People & Culture Partner", company: "Nasstar", period: "Aug 2021 – Apr 2022",
+    companyContext: "IT services provider · £200m turnover · 1,100 employees · UK & Malaysia",
+    context: "Supporting the Group and Sales functions (c.250 employees) at this IT services provider.",
+    achievements: [
+      "Partnered with divisional leadership teams to drive culture and performance improvement, delivering monthly data-led talent reviews",
+      "Led HR project work on modernising the performance management framework, piloting a streamlined review process to replace an outdated and administratively heavy approach",
+    ]
+  },
+  {
+    title: "Group HR Manager", company: "Nasstar (Formerly GCI)", period: "Jun 2019 – Aug 2021",
+    companyContext: "UK-based IT services company · 900 employees globally",
+    context: "Returned to the business in a newly created senior role. Managed the HR Shared Services function with 4 direct reports, responsible for HR operations, policy, compliance and GDPR.",
+    achievements: [
+      "Procured and implemented HiBob HRIS from scratch, delivering a modern people system to replace legacy tooling across the business",
+      "Conducted a comprehensive salary mapping exercise across 700 roles using Willis Towers Watson market data, establishing internal salary reference points across all job families",
+      "Managed the 2021 company-wide salary review against a budget of £900k, using market benchmarking data to drive fair, evidenced pay decisions",
+      "Successfully consolidated three separate payrolls and pension schemes into a single unified arrangement, including TUPE transfers",
+      "Managed a sensitive headcount reduction programme of c.40 roles in 2019, supporting both the business and affected employees through a complex process",
+      "Automated common HR processes using Microsoft Power Automate, reducing manual intervention and improving response times",
+    ]
+  },
+  {
+    title: "HR Manager", company: "U Account", period: "Nov 2018 – May 2019",
+    companyContext: "Fintech providing alternative banking products",
+    context: "Led the HR function as the sole senior HR practitioner, reporting to the CFO and implementing the People plan.",
+    achievements: [
+      "Introduced HR reporting and metrics to the business for the first time, presenting monthly to the Executive team — establishing HR as a data-driven function with a seat at the leadership table",
+      "Insourced the payroll process, removing reliance on external providers and delivering measurable cost savings",
+      "Sourced and implemented a new LMS and HRIS, building the people systems infrastructure from scratch within a 6-month tenure",
+    ]
+  },
+  {
+    title: "HR Advisor", company: "GCI Network Solutions", period: "Nov 2016 – Nov 2018",
+    companyContext: "IT network solutions provider",
+    context: "Senior HR practitioner within the function, managing 2 direct reports alongside an interim HRD — effectively leading day-to-day HR operations for the business.",
+    achievements: [
+      "Harmonised three legacy HR systems into a single groupwide platform, improving data consistency and reducing administrative overhead",
+      "Reduced external recruitment costs by £50,000 per annum by reducing agency reliance and building internal sourcing capability",
+      "Led the business through GDPR compliance and the introduction of the apprenticeship levy — delivering both programmes on time",
+      "Introduced improved HR reporting and analytics for monthly board reporting, providing leadership with meaningful people data for the first time",
+    ]
+  },
+  {
+    title: "Retail Management", company: "Halfords & Waterstones", period: "Sep 2004 – Aug 2015",
+    context: "Progressive retail management career including Manager at Halfords, Assistant Manager and Lead Bookseller at Waterstones across multiple locations.",
+    achievements: []
+  },
 ];
 
 const projects = [
-  { title: "Global ATS Rollout", subtitle: "Pinpoint", icon: "🌍", color: "#C2703E", summary: "Sourced, implemented and rolled out a global Applicant Tracking System across UK, India, US and APAC.", challenge: "Davies Group had no unified recruitment platform. Hiring practices varied by region, data was siloed, and there was no visibility into recruitment performance across the business.", approach: "Led a full procurement process to select Pinpoint as the global ATS. Managed stakeholder alignment across multiple regions, designed standardised recruitment workflows, and planned a phased rollout starting with UK and India before expanding to US and APAC.", impact: ["2,000+ successful hires processed through the platform since launch in October 2024","Streamlined recruitment practices and onboarding efficiencies across all regions","Designed integration between ATS and HRIS reducing manual data entry","Provided recruitment analytics and reporting for the first time globally"], tools: ["Pinpoint","Sage People","API Integrations"] },
-  { title: "HiBob Implementation", subtitle: "HRIS Transformation", icon: "🔄", color: "#7B6B5D", summary: "Identified HiBob as a future market leader while still relatively unknown, and led a full HRIS implementation at Nasstar — complicated by a 400-person acquisition mid-rollout.", challenge: "Nasstar's existing HRIS was built for smaller SMEs and couldn't keep pace with a growing, enterprise-scale business. The system lacked the flexibility and depth needed for robust people operations, reporting and employee experience.", approach: "Conducted a thorough market search to find an enterprise-ready solution. Identified HiBob early — before they became a well-known player in the HR Tech space — recognising their potential based on product roadmap, UX and scalability. Led the full procurement and implementation. Mid-rollout, Nasstar acquired a 400-strong business, requiring rapid data mapping and onboarding of the new workforce into the platform at the same time.", impact: ["Successfully implemented a modern, enterprise-grade HRIS across the organisation","Spotted and backed HiBob before they became a mainstream HR Tech name","Seamlessly absorbed a 400-person acquisition into the new system during rollout","Delivered improved reporting, employee self-service and HR process automation"], tools: ["HiBob","Data Migration","TUPE","Change Management"] },
-  { title: "HR Tech Team — India", subtitle: "Offshore Build", icon: "🏗️", color: "#8B6F4E", summary: "Built a brand new HR Technology team in India from scratch to offshore BAU activities from the UK.", challenge: "The UK HR Technology team was overwhelmed with BAU support tickets, leaving almost no capacity for strategic projects and continuous improvement work.", approach: "Designed the team structure, role profiles and operating model. Led recruitment and onboarding of new team members in India. Established processes, SLAs and knowledge transfer frameworks to ensure quality.", impact: ["UK team freed up 40% more time for projects and continuous improvements","BAU activities handled efficiently with defined SLAs","Created Davies Group's first HR technology strategy with KPIs","Enabled the UK team to focus on automation and digital transformation"], tools: ["Service Desk","ITIL Processes","Knowledge Management"] },
-  { title: "JML Process Fix", subtitle: "40% → 90% Success", icon: "🔧", color: "#B8860B", summary: "Solved a global Joiners, Movers, Leavers process failure that was preventing new starters from receiving equipment on time.", challenge: "The Joiners, Movers, Leavers (JML) process was broken — only 40% of new joiners were receiving their equipment on time. Data wasn't flowing correctly between HR and IT systems, causing delays, frustration and a poor first impression for new starters.", approach: "Partnered with Group IT to diagnose the root causes. Solutionised a fix involving improved data flows, system triggers and process redesign to ensure accurate, timely equipment provisioning for all new joiners.", impact: ["New joiner equipment success rate increased from 40% to 90%","Improved data accuracy between HR and IT systems","Better new starter experience and first impressions","Reduced support tickets and manual chasing by the HR and IT teams"], tools: ["HRIS","IT Service Management","Process Automation"] },
-  { title: "1,700-Person Acquisition", subtitle: "Systems Integration", icon: "🤝", color: "#A0522D", summary: "Supported the acquisition and integration of a 1,700-colleague business ensuring smooth data and systems transition.", challenge: "A major acquisition brought 1,700 new colleagues into Davies Group. Their data lived in Workday while Davies used Sage — two fundamentally different HRIS platforms that needed to work together.", approach: "Worked with Group IT and the acquired business to map data structures, design migration plans and build a custom API integration between Workday and Sage People. Ensured data accuracy throughout the transition.", impact: ["Smooth data and systems transition for 1,700 colleagues","Custom API built between Workday and Sage People","Zero disruption to payroll and core HR processes during transition","Established integration patterns reusable for future acquisitions"], tools: ["Workday","Sage People","Custom API","Data Migration Tools"] },
-  { title: "Automated Referencing", subtitle: "Power Automate", icon: "⚡", color: "#CD853F", summary: "Designed and built an automated employee referencing tool using Power Automate, saving hundreds of hours annually.", challenge: "Employee referencing was entirely manual — HR team members were spending significant time chasing, sending and logging reference requests for every new hire. The process was slow, error-prone and a major bottleneck.", approach: "Mapped the end-to-end referencing workflow, identified automation opportunities, and built a Power Automate flow to handle request sending, chasing, logging and status tracking automatically.", impact: ["Hundreds of hours saved across the HR Operations team per year","Faster reference turnaround times improving time-to-hire","Reduced human error in reference tracking and logging","Freed team capacity for higher-value work"], tools: ["Microsoft Power Automate","Outlook","SharePoint"] },
+  {
+    title: "Global ATS Rollout",
+    subtitle: "Pinpoint · 4 Regions",
+    icon: "🌍",
+    color: "#C2703E",
+    summary: "Sourced, implemented and rolled out a global Applicant Tracking System across UK, India, US and APAC — processing 160,000+ applications and delivering 1,550+ hires in 2025 alone.",
+    challenge: "Davies Group had no unified recruitment platform. Hiring practices varied by region, data was siloed, and there was zero visibility into recruitment performance across the business. Multiple legacy systems including Sage and Networx were creating inconsistent candidate experiences and unreliable reporting.",
+    approach: "Led the full procurement process to select Pinpoint as the global ATS. Managed stakeholder alignment across multiple regions and time zones, designed standardised recruitment workflows, and executed a phased rollout — starting with the UK and India before expanding to the US and APAC. Built a direct API integration between Pinpoint and Sage People HRIS to eliminate manual data transfer between systems.",
+    impact: [
+      "160,000+ applications managed through the platform globally",
+      "1,550+ hires delivered in 2025 alone, at an average time-to-hire of 18 days",
+      "Direct API integration with Sage People eliminated manual data entry and materially improved data accuracy across the employee lifecycle",
+      "Recruitment analytics and pipeline reporting introduced globally for the first time",
+      "Consolidated and replaced multiple legacy systems into a single consistent platform",
+    ],
+    tools: ["Pinpoint","Sage People","API Integration","Power BI"],
+  },
+  {
+    title: "HiBob Implementation",
+    subtitle: "HRIS Transformation",
+    icon: "🔄",
+    color: "#7B6B5D",
+    summary: "Identified HiBob as a future market leader while still relatively unknown, and led a full HRIS implementation at Nasstar — complicated by a 400-person acquisition mid-rollout.",
+    challenge: "Nasstar's existing HRIS was built for smaller SMEs and couldn't keep pace with a growing, enterprise-scale business. The system lacked the flexibility, depth and reporting capability needed for robust people operations and employee experience at scale.",
+    approach: "Conducted a thorough market search to find an enterprise-ready solution. Identified HiBob early — before they became a well-known player in the HR Tech space — recognising their potential based on product roadmap, UX and scalability. Led the full procurement and implementation process. Mid-rollout, Nasstar acquired a 400-strong business, requiring rapid data mapping and onboarding of the new workforce into the platform simultaneously.",
+    impact: [
+      "Successfully implemented a modern, enterprise-grade HRIS across the entire organisation",
+      "Identified and backed HiBob before they became a mainstream HR Tech name — a call that proved prescient",
+      "Seamlessly absorbed a 400-person acquisition into the new system during the live rollout",
+      "Delivered improved reporting, employee self-service and HR process automation at scale",
+    ],
+    tools: ["HiBob","Data Migration","TUPE","Change Management"],
+  },
+  {
+    title: "Power BI Data Governance",
+    subtitle: "Real-Time HR Intelligence",
+    icon: "📊",
+    color: "#5B7FA6",
+    summary: "Designed and built a live Power BI Data Governance Tool connected via API to Sage People, giving HR real-time visibility of data quality across 8,000+ employees globally.",
+    challenge: "HR data quality across Davies Group was inconsistent and difficult to monitor at scale. Incomplete or incorrect employee records in Sage People were causing downstream issues across payroll, compliance reporting and IT provisioning — but there was no systematic way to identify and resolve problems at source.",
+    approach: "Designed and built a Power BI solution connected directly to Sage People via API, creating a real-time data governance dashboard that automatically flagged incomplete or incorrect fields across the employee population. Developed a parallel suite of compliance dashboards tracking mandatory training completion, giving CISO, Privacy and HR teams self-serve access to intelligence that previously required significant manual effort to produce.",
+    impact: [
+      "Real-time visibility of data accuracy across 8,000+ employees globally",
+      "Automated flagging of incomplete or incorrect HR data fields, enabling HR Operations to resolve issues at source",
+      "Compliance dashboards gave CISO, Privacy and HR teams self-serve intelligence for the first time",
+      "Mandatory training tracking across the global workforce replaced a previously manual, time-intensive reporting process",
+      "Introduced monthly and quarterly HR reporting dashboards, enabling evidence-based decision making at senior leadership level",
+    ],
+    tools: ["Power BI","Sage People","API Integration","DAX","HR Data Governance"],
+  },
+  {
+    title: "JML Process Overhaul",
+    subtitle: "40% → 90% Success Rate",
+    icon: "🔧",
+    color: "#B8860B",
+    summary: "Diagnosed and resolved a critical global Joiners, Movers, Leavers process failure — engineering a cross-functional fix that increased new joiner equipment success rates from 40% to 90%.",
+    challenge: "The JML process was fundamentally broken — only 40% of new joiners were receiving their equipment on time. Data wasn't flowing correctly between HR and IT systems, causing delays, frustration and a damaging first impression for new starters at scale across a 9,000-person global business.",
+    approach: "Partnered with Group IT to conduct a root cause analysis of the end-to-end JML workflow. Identified the precise points of failure in data flows between HRIS and IT service management systems. Engineered a cross-functional solution involving improved system triggers, data validation rules and process redesign — ensuring accurate, timely equipment provisioning for every new joiner.",
+    impact: [
+      "New joiner equipment success rate increased from 40% to 90% — a step change in day-one experience",
+      "Improved data accuracy and reliability between HR and IT systems",
+      "Significant reduction in support tickets, manual chasing and escalations from new starters and managers",
+      "Cross-functional process redesign established a reusable template for future HR-IT integration improvements",
+    ],
+    tools: ["Sage People","IT Service Management","Process Automation","Root Cause Analysis"],
+  },
+  {
+    title: "1,700-Person Acquisition",
+    subtitle: "Systems Integration",
+    icon: "🤝",
+    color: "#A0522D",
+    summary: "Led the HR systems workstream for a major acquisition — building a custom API between Workday and Sage People to integrate 1,700 colleagues without disruption to payroll or core HR.",
+    challenge: "A significant acquisition brought 1,700 new colleagues into Davies Group. Their data lived in Workday while Davies operated on Sage People — two fundamentally different HRIS platforms with different data structures, field mappings and integration requirements that needed to work together from day one.",
+    approach: "Worked with Group IT and the acquired business to map data structures, identify field-level discrepancies and design a robust migration plan. Built a custom API integration between Workday and Sage People to ensure accurate, automated data flow between systems. Managed data validation throughout the transition to guarantee integrity before go-live.",
+    impact: [
+      "Smooth data and systems transition for 1,700 colleagues with zero disruption to payroll or core HR processes",
+      "Custom API built between Workday and Sage People — a complex technical integration delivered on time",
+      "Data integrity maintained throughout the transition via a rigorous validation process",
+      "Integration architecture established as a reusable pattern for future acquisitions",
+    ],
+    tools: ["Workday","Sage People","Custom API","Data Migration","Data Validation"],
+  },
+  {
+    title: "Automated Referencing Tool",
+    subtitle: "Power Automate · 250+ hrs saved",
+    icon: "⚡",
+    color: "#CD853F",
+    summary: "Designed and built a Power Automate referencing tool that eliminated a fully manual copy-paste process — saving 250+ hours annually across c.1,000 hires per year.",
+    challenge: "Employee referencing was entirely manual — HR team members were individually sending, chasing and logging reference requests for every single hire. With c.1,000 hires per year, the cumulative time cost was enormous, the process was error-prone and it was creating a bottleneck in onboarding timelines.",
+    approach: "Mapped the complete end-to-end referencing workflow and identified every manual touchpoint. Built a Power Automate flow to handle reference request sending, automated chasing sequences, response logging and status tracking — removing human intervention from the process entirely while maintaining an auditable record.",
+    impact: [
+      "250+ hours saved annually across the HR Operations team — equivalent to over 6 working weeks",
+      "Faster reference turnaround times, contributing to improved time-to-hire across c.1,000 hires per year",
+      "Human error in reference tracking and logging eliminated through automation",
+      "HR team capacity freed for higher-value operational and strategic work",
+    ],
+    tools: ["Microsoft Power Automate","Outlook","SharePoint","Pinpoint ATS"],
+  },
 ];
 
 const education = [
@@ -330,6 +520,7 @@ const skills = {
   "HRIS": ["HiBob","Sage People","Cascade","PeopleHR"],
   "ATS": ["Pinpoint","Teamtailor","Networx","Workable"],
   "Data & Reporting": ["Power BI","Tableau","Advanced Excel","Power Automate"],
+  "AI & Automation": ["Microsoft Copilot & Copilot Agent Studio","Claude AI (incl. MCP integration)","Power Automate AI Builder","Pinpoint AI","Prompt Engineering for HR"],
   "HR Expertise": ["M&A & TUPE","Reward Management","Process Automation","Talent Acquisition","Employee Relations","Business Process Improvement","Performance Management","Employee Engagement","Salary Benchmarking","Payroll","Project Management"],
 };
 
@@ -360,7 +551,19 @@ const values = [
 // ─── RENDER ──────────────────────────────────────────────────
 function renderTimeline() {
   const el = document.getElementById('timeline');
-  el.innerHTML = roles.map((r, i) => `
+  el.innerHTML = roles.map((r, i) => {
+    let bodyContent = '';
+    if (r.sections) {
+      bodyContent = r.sections.map(sec => `
+        <div style="margin-top:16px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C2703E;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #EDE5D8">${sec.label}</div>
+          ${sec.achievements.map(a => `<div class="achievement"><span class="achievement-dot">●</span><span class="achievement-text text-body">${a}</span></div>`).join('')}
+        </div>
+      `).join('');
+    } else if (r.achievements.length) {
+      bodyContent = '<div style="margin-top:12px">' + r.achievements.map(a => `<div class="achievement"><span class="achievement-dot">●</span><span class="achievement-text text-body">${a}</span></div>`).join('') + '</div>';
+    }
+    return `
     <div class="timeline-item">
       <div class="timeline-dot ${i === 0 ? 'current' : ''}"></div>
       <div class="card role-card scroll-reveal" style="transition-delay: ${i * 60}ms" onclick="this.classList.toggle('open')">
@@ -378,12 +581,12 @@ function renderTimeline() {
           <div class="role-body-inner">
             ${r.companyContext ? `<div class="role-context-label">${r.companyContext}</div>` : ''}
             <p class="role-context text-body">${r.context}</p>
-            ${r.achievements.length ? '<div style="margin-top:12px">' + r.achievements.map(a => `<div class="achievement"><span class="achievement-dot">●</span><span class="achievement-text text-body">${a}</span></div>`).join('') + '</div>' : ''}
+            ${bodyContent}
           </div>
         </div>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 function renderEducation() {
